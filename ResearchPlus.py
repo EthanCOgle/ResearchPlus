@@ -9,17 +9,14 @@ def web(page,WebUrl):
         code = requests.get(url) #html code for url page
         plain = code.text #text html code
         s = BeautifulSoup(plain, "html.parser") #takes html code and parses it
-        for link in s.findAll('a', attrs={'href': re.compile("^http://")}):
-            #print(link.get('href'))
-            listOfUrls.append(link.get('href'))
+        for link in s.findAll('a', attrs={'href': re.compile("^http://")}): 
+            listOfUrls.append(link.get('href')) #adds all the urls of the website to a list
         while (using):
-            #print(len(listOfUrls))
             WebUrl = listOfUrls.pop(0)
             texts = s.findAll(text=True)
             PartialWord = input("What to you want to search for: ")
             allText = [word for word in texts]
             need = []
-            #keywords = [word for word in texts if PartialWord in word]
             for word in texts:
                 if (PartialWord in word):
                     if (texts.index(word) > 0):
